@@ -1,0 +1,8 @@
+ROOMS
+432, 10, 22, 4, room;
+400, 2, 22, 4, transit;
+200, 5, 11, 2, room;
+
+TRANSITIONS
+400, 432, walk, 2, yes;
+200, 400, climb, 4, yes;
