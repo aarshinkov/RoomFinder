@@ -5,7 +5,7 @@ ___
 
 ## The project is created using:
 
-1. [IntelliJ IDEA 2019.1 Community version](https://www.jetbrains.com/idea/download)
+1. <a href="https://www.jetbrains.com/idea/download" target="_blank">IntelliJ IDEA 2019.1 Community version</a>
 2. [Java & JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 3. Maven build tool
 
