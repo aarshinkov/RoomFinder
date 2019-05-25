@@ -93,6 +93,21 @@ public class Building {
         System.out.println(path.reverse());
     }
 
+    public double findLength(int roomOneNumber, int roomTwoNumber) {
+
+        Room roomOne = getRoom(roomOneNumber);
+
+        for (Transition transition : roomOne.getTransitions()) {
+            if (transition.getToRoomNumber() == roomTwoNumber) {
+//                System.out.println("Transition distance between room " + roomOneNumber + " and room " + roomTwoNumber + " is " + transition.getLength());
+                return transition.getLength();
+            }
+        }
+
+//        System.out.println("No transition between room " + roomOneNumber + " and room " + roomTwoNumber + " has been found");
+        return 0.00;
+    }
+
     public double findDistance(int roomOneNumber, int roomTwoNumber) {
 
         Room roomOne = getRoom(roomOneNumber);

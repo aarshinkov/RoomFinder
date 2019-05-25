@@ -9,13 +9,17 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static Building building = new Building();
+    private Building building = new Building();
 
     public static void main(String[] args) throws Exception {
-        init();
+        Main main = new Main();
+
+        main.init();
+
+        main.building.findLength(401, 400);
     }
 
-    private static void init() throws Exception {
+    public void init() throws Exception {
         // File path in src/main/resources/...
         String fileName = "files/structure.txt";
 
@@ -52,7 +56,7 @@ public class Main {
         }
     }
 
-    private static void createRoomFromLine(String line) {
+    private void createRoomFromLine(String line) {
         String[] components = line.split(", ");
 
         building.addRoom(new Room(Integer.parseInt(components[0]),
@@ -62,7 +66,7 @@ public class Main {
                 components[4].substring(0, components[4].length() - 1))); // For removing semicolon (;)
     }
 
-    private static void createTransitionFromLine(String line) {
+    private void createTransitionFromLine(String line) {
         String[] components = line.split(", ");
 
         boolean isBidirectional = (components[4].substring(0, components[4].length() - 1).equalsIgnoreCase("yes"));
@@ -72,5 +76,9 @@ public class Main {
                 components[2],
                 isBidirectional,
                 Integer.parseInt(components[3]));
+    }
+
+    public Building getBuilding() {
+        return building;
     }
 }
