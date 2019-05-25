@@ -2,30 +2,18 @@ package com.uni.roomfinder.obj;
 
 public class Transition {
 
-    private int fromRoomNumber;
     private int toRoomNumber;
-
     private String transitionType;
-    private int distance;
-    private boolean isBidirectional;
+    private double length;
 
-    @Override
-    public String toString() {
-        return "Transition{" +
-                "fromRoomNumber=" + fromRoomNumber +
-                ", toRoomNumber=" + toRoomNumber +
-                ", transitionType='" + transitionType + '\'' +
-                ", distance=" + distance +
-                ", isBidirectional=" + isBidirectional +
-                '}';
+    public Transition(int toRoomId, String transitionType) {
+        this.toRoomNumber = toRoomId;
+        this.transitionType = transitionType;
     }
 
-    public int getFromRoomNumber() {
-        return fromRoomNumber;
-    }
-
-    public void setFromRoomNumber(int fromRoomNumber) {
-        this.fromRoomNumber = fromRoomNumber;
+    public Transition(int toRoomId, String transitionType, double length) {
+        this(toRoomId, transitionType);
+        this.length = length;
     }
 
     public int getToRoomNumber() {
@@ -44,19 +32,11 @@ public class Transition {
         this.transitionType = transitionType;
     }
 
-    public int getDistance() {
-        return distance;
+    public double getLength() {
+        return length;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
-    public boolean isBidirectional() {
-        return isBidirectional;
-    }
-
-    public void setBidirectional(boolean bidirectional) {
-        isBidirectional = bidirectional;
+    public void setLength(double length) {
+        this.length = length;
     }
 }

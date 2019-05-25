@@ -1,40 +1,18 @@
 package com.uni.roomfinder.main;
 
+import com.uni.roomfinder.obj.Building;
 import com.uni.roomfinder.obj.Room;
-import com.uni.roomfinder.obj.Transition;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
 
-    private static List<Room> rooms = new ArrayList<>();
-
-    private static List<Transition> transitions = new ArrayList<>();
+    private static Building building = new Building();
 
     public static void main(String[] args) throws Exception {
         init();
-
-        System.out.println("Rooms: ");
-
-        for (Room room : rooms) {
-            System.out.println(room);
-        }
-
-        System.out.println("-----------------------");
-
-        System.out.println("Transitions: ");
-
-        for (Transition transition : transitions) {
-            System.out.println(transition);
-        }
-
-        System.out.println("-----------------------");
-
     }
 
     private static void init() throws Exception {
@@ -47,70 +25,52 @@ public class Main {
         // and from fileName takes the file as an object
         File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
 
+        Scanner sc = new Scanner(file);
+
         // Reading from file
-        try (FileReader reader = new FileReader(file);
-             BufferedReader br = new BufferedReader(reader)) {
+        try {
 
-            String line;
-
-            boolean isRooms = false;
-            boolean isTransitions = false;
+            boolean isRooms = true;
 
             // While there is lines to read
-            while ((line = br.readLine()) != null) {
-                if (line.equals("ROOMS")) {
-                    isTransitions = false;
-                    isRooms = true;
-                    continue;
-                } else if (line.equals("TRANSITIONS")) {
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+
+                if (line.isEmpty()) {
                     isRooms = false;
-                    isTransitions = true;
                     continue;
-                } else if (line.isEmpty()) { // Blank line
-                    isRooms = false;
-                    isTransitions = false;
                 }
 
                 if (isRooms) {
-                    createObjectFromLine(line, new Room());
-                } else if (isTransitions) {
-                    createObjectFromLine(line, new Transition());
+                    createRoomFromLine(line);
+                } else {
+                    createTransitionFromLine(line);
                 }
             }
+
         } catch (Exception ignored) {
         }
     }
 
-    private static void createObjectFromLine(String line, Object object) {
+    private static void createRoomFromLine(String line) {
         String[] components = line.split(", ");
 
-        if (object instanceof Room) {
-            Room room = new Room();
-
-            room.setRoomId(Integer.parseInt(components[0]));
-            room.setX(Integer.parseInt(components[1]));
-            room.setY(Integer.parseInt(components[2]));
-            room.setFloor(Integer.parseInt(components[3]));
-            room.setType(components[4].substring(0, components[4].length() - 1)); // For removing semicolon (;)
-
-            rooms.add(room);
-
-        } else if (object instanceof Transition) {
-            Transition transition = new Transition();
-
-            transition.setFromRoomNumber(Integer.parseInt(components[0]));
-            transition.setToRoomNumber(Integer.parseInt(components[1]));
-            transition.setTransitionType(components[2]);
-            transition.setDistance(Integer.parseInt(components[3]));
-
-            if (components[4].substring(0, components[4].length() - 1).equalsIgnoreCase("yes")) {
-                transition.setBidirectional(true);
-            } else {
-                transition.setBidirectional(false);
-            }
-
-            transitions.add(transition);
-        }
+        building.addRoom(new Room(Integer.parseInt(components[0]),
+                Integer.parseInt(components[1]),
+                Integer.parseInt(components[2]),
+                Integer.parseInt(components[3]),
+                components[4].substring(0, components[4].length() - 1))); // For removing semicolon (;)
     }
 
+    private static void createTransitionFromLine(String line) {
+        String[] components = line.split(", ");
+
+        boolean isBidirectional = (components[4].substring(0, components[4].length() - 1).equalsIgnoreCase("yes"));
+
+        building.addTransition(Integer.parseInt(components[0]),
+                Integer.parseInt(components[1]),
+                components[2],
+                isBidirectional,
+                Integer.parseInt(components[3]));
+    }
 }

@@ -1,36 +1,51 @@
 package com.uni.roomfinder.obj;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room {
 
-    private int roomId;
-
+    private int roomNumber;
     private int x;
-
     private int y;
-
     private int floor;
-
     private String type;
 
-    private List<Transition> transitions = new ArrayList<>();
+    private boolean isTested = false;
+    private boolean isExpanded = false;
+    private int depth = -1;
+    private double distanceToGoal = 0.0;
+    private Room parent = null;
 
-    public Room() {
+    private ArrayList<Transition> transitions = new ArrayList<>();
+//    public double weight;
+
+
+    public Room(int roomNumber, int floor, String type) {
+        this.roomNumber = roomNumber;
+        this.floor = floor;
+        this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Room{roomId=" + roomId + ", x=" + x + ", y=" + y + ", floor=" + floor + ", type='" + type + "', transitions='" + transitions + "'}";
+    public Room(int roomNumber, int x, int y, int floor, String type) {
+        this(roomNumber, floor, type);
+        this.x = x;
+        this.y = y;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public void reset() {
+        this.isExpanded = false;
+        this.isTested = false;
+        this.depth = -1;
+        this.distanceToGoal = 0.0;
+        this.parent = null;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public int getX() {
@@ -65,11 +80,51 @@ public class Room {
         this.type = type;
     }
 
-    public List<Transition> getTransitions() {
+    public boolean isTested() {
+        return isTested;
+    }
+
+    public void setTested(boolean tested) {
+        isTested = tested;
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public double getDistanceToGoal() {
+        return distanceToGoal;
+    }
+
+    public void setDistanceToGoal(double distanceToGoal) {
+        this.distanceToGoal = distanceToGoal;
+    }
+
+    public Room getParent() {
+        return parent;
+    }
+
+    public void setParent(Room parent) {
+        this.parent = parent;
+    }
+
+    public ArrayList<Transition> getTransitions() {
         return transitions;
     }
 
-    public void setTransitions(List<Transition> transitions) {
+    public void setTransitions(ArrayList<Transition> transitions) {
         this.transitions = transitions;
     }
 }
