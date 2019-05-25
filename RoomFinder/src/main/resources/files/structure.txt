@@ -1,8 +1,18 @@
-ROOMS
-432, 10, 22, 4, room;
+301, 6, 8, 3, room;
+303, 5, 2, 3, room;
 400, 2, 22, 4, transit;
-200, 5, 11, 2, room;
+401, 6, 8, 4, transit;
+403, 5, 2, 4, room;
+500, 2, 22, 5, transit;
+527, 10, 10, 5, room;
+528, 10, 15, 5, room;
 
-TRANSITIONS
-400, 432, walk, 2, yes;
-200, 400, climb, 4, yes;
+301, 303, walk, 1, yes;
+301, 401, lift, 4, yes;
+303, 403, climb, 3, yes;
+403, 401, walk, 1, yes;
+401, 400, walk, 6, yes;
+400, 500, climb, 3, yes;
+500, 527, walk, 1, yes;
+500, 528, walk, 4, yes;
+527, 528, walk, 5, yes;
