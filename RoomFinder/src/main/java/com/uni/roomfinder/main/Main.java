@@ -16,7 +16,7 @@ public class Main {
 
         main.init();
 
-        main.building.findLength(401, 400);
+
     }
 
     public void init() throws Exception {
