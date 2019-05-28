@@ -2,7 +2,7 @@ package com.uni.roomfinder.obj;
 
 public enum Type {
     ROOM,
-    TRANSITION,
+    TRANSIT,
     WALK,
     CLIMB,
     LIFT

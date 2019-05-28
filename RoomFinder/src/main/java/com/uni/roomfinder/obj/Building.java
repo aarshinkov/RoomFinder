@@ -3,6 +3,7 @@ package com.uni.roomfinder.obj;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class Building {
 
@@ -46,7 +47,7 @@ public class Building {
     }
 
 
-    private ArrayList<Room> getLinkedRooms(int roomNumber) {
+    public ArrayList<Room> getLinkedRooms(int roomNumber) {
         ArrayList<Room> linkedRooms = new ArrayList<>();
         Room room = myBuilding.get(roomNumber);
         for (Transition transition : room.getTransitions()) {
@@ -59,11 +60,11 @@ public class Building {
         myBuilding.forEach((k, v) -> v.reset());
     }
 
-    public void sortByRoomNumber(ArrayList<Room> list) {
+    public void sortByRoomNumber(List<Room> list) {
         list.sort(byRoomNumber);
     }
 
-    public void sortByDistance(ArrayList<Room> list) {
+    public void sortByDistance(List<Room> list) {
 
         list.sort(byDistance.thenComparing(byRoomNumber));
     }
