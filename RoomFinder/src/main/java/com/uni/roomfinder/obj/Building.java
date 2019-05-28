@@ -37,7 +37,7 @@ public class Building {
     }
 
 
-    private Room getRoom(int roomNumber) {
+    public Room getRoom(int roomNumber) {
         return myBuilding.get(roomNumber);
     }
 

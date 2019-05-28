@@ -13,8 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         init();
 
-        findPath(303, 304, new SearchPathAvoiding(building, Type.CLIMB));
-//        findPath(301, 303, new SearchPathAvoiding(building, Type.CLIMB));
+        findPath(134, 204, new SearchPathAvoiding(building, Type.CLIMB));
 
     }
 
@@ -95,7 +94,7 @@ public class Main {
         switch (text.toLowerCase()) {
             case "room":
                 return Type.ROOM;
-            case "transition":
+            case "transit":
                 return Type.TRANSITION;
             case "walk":
                 return Type.WALK;

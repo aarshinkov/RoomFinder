@@ -12,8 +12,13 @@ public class SearchPathAvoiding implements Searchable {
 
     @Override
     public boolean search(int startRoomNumber, int endRoomNumber) {
+        if (!building.containsRoom(startRoomNumber) || !building.containsRoom(endRoomNumber)) {
+            System.out.println("One or both of the rooms does not exist");
+            return false;
+        }
 
+        Room checkpoint = building.getRoom(startRoomNumber);
 
-        return false;
+        return true;
     }
 }
