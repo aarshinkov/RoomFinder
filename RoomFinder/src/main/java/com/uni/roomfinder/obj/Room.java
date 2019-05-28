@@ -17,7 +17,7 @@ public class Room {
     private Room parent = null;
 
     private ArrayList<Transition> transitions = new ArrayList<>();
-//    public double weight;
+    public double weight;
 
 
     public Room(int roomNumber, int floor, Type type) {
@@ -126,5 +126,13 @@ public class Room {
 
     public void setTransitions(ArrayList<Transition> transitions) {
         this.transitions = transitions;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 }

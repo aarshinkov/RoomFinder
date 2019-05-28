@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         init();
 
-        findPath(232, 330, new SearchPathAvoiding(building, Type.LIFT));
+//        findPath(232, 330, new SearchPathAvoiding(building, Type.LIFT));
+
+        findPath(232, 330, new SearchPathDoubleClimb(building));
 
     }
 

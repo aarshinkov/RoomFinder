@@ -11,6 +11,8 @@ public class Building {
 
     private Comparator<Room> byRoomNumber = Comparator.comparingInt(Room::getRoomNumber);
 
+    private Comparator<Room> byWeight = Comparator.comparingDouble(Room::getWeight);
+
     private Comparator<Room> byDistance = Comparator.comparingDouble(Room::getDistanceToGoal);
 
 
@@ -80,6 +82,10 @@ public class Building {
         list.sort(byDistance.thenComparing(byRoomNumber));
     }
 
+    public void sortByWeight(List<Room> list) {
+        list.sort(byWeight.thenComparing(byRoomNumber));
+    }
+
     public void setDepths(int roomNumber) {
         Room room = getRoom(roomNumber);
         for (Room r : getLinkedRooms(roomNumber)) {
@@ -105,7 +111,7 @@ public class Building {
 
         path.append(currentRoom.getRoomNumber());
 
-        System.out.println(path.reverse());
+        System.out.print(path);
     }
 
     public double findLength(int roomOneNumber, int roomTwoNumber) {

@@ -7,7 +7,6 @@ public class SearchPathAvoiding implements Searchable {
 
     private Building building;
     private Type avoidedType;
-    private int startRoomNumber;
 
     public SearchPathAvoiding(Building building, Type avoidedType) {
         this.building = building;
@@ -49,28 +48,5 @@ public class SearchPathAvoiding implements Searchable {
         }//end while
 
         return false;
-    }
-
-    private void setParentAndCost(Room room) {
-        Room temp;
-        for (Transition transition : room.getTransitions()) {
-            if (transition.getToRoomNumber() == startRoomNumber) continue;
-            temp = building.getRoom(transition.getToRoomNumber());
-            if ((temp.getParent() == null) || (temp.getDistanceToGoal() > room.getDistanceToGoal() + transition.getLength())) {
-                temp.setParent(room);
-                temp.setDistanceToGoal(room.getDistanceToGoal() + transition.getLength());
-            }
-        }
-    }
-
-    public void printPath(int roomNumber) {
-        Room room = building.getRoom(roomNumber);
-        StringBuilder path = new StringBuilder();
-        do {
-            path.append(room.getRoomNumber());
-            room = room.getParent();
-        } while (room != null);
-        path.reverse();
-        System.out.println(path + " distance: " + building.getRoom(roomNumber).getDistanceToGoal());
     }
 }
