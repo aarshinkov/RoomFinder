@@ -17,7 +17,12 @@ public class SearchPathAvoiding implements Searchable {
             return false;
         }
 
-        Room checkpoint = building.getRoom(startRoomNumber);
+        System.out.println(building.getRoom(startRoomNumber).getTransitions().size());
+
+        for (Transition transition : building.getRoom(startRoomNumber).getTransitions()) {
+            System.out.println(transition.getToRoomNumber());
+        }
+
 
         return true;
     }
