@@ -47,11 +47,22 @@ public class Building {
     }
 
 
-    public ArrayList<Room> getLinkedRooms(int roomNumber) {
-        ArrayList<Room> linkedRooms = new ArrayList<>();
+    public List<Room> getLinkedRooms(int roomNumber) {
+        List<Room> linkedRooms = new ArrayList<>();
         Room room = myBuilding.get(roomNumber);
         for (Transition transition : room.getTransitions()) {
             linkedRooms.add(myBuilding.get(transition.getToRoomNumber()));
+        }
+        return linkedRooms;
+    }
+
+    public List<Room> getLinkedRoomsAvoid(int roomNumber, Type type) {
+        List<Room> linkedRooms = new ArrayList<>();
+        Room room = myBuilding.get(roomNumber);
+        for (Transition transition : room.getTransitions()) {
+            if (!transition.getTransitionType().equals(type)) {
+                linkedRooms.add(myBuilding.get(transition.getToRoomNumber()));
+            }
         }
         return linkedRooms;
     }

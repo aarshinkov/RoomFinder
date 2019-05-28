@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         init();
 
-        findPath(134, 330, new SearchPathAvoiding(building, Type.CLIMB));
+        findPath(232, 330, new SearchPathAvoiding(building, Type.LIFT));
 
     }
 

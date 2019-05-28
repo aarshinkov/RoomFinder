@@ -38,7 +38,7 @@ public class SearchPathAvoiding implements Searchable {
             temp.setTested(true);
             queue.remove(0);
 
-            for (Room room : building.getLinkedRooms(temp.getRoomNumber())) {
+            for (Room room : building.getLinkedRoomsAvoid(temp.getRoomNumber(), avoidedType)) {
                 if (!room.isTested() && !queue.contains(room)) {
                     queue.add(room);
                 }
@@ -49,52 +49,6 @@ public class SearchPathAvoiding implements Searchable {
         }//end while
 
         return false;
-    }
-
-    public boolean search3(int startRoomNumber, int endRoomNumber) {
-        if (!building.containsRoom(startRoomNumber) || !building.containsRoom(endRoomNumber)) {
-            System.out.println("One or both of the rooms does not exist");
-            return false;
-        }
-
-        this.startRoomNumber = startRoomNumber;
-
-        Room startRoom = building.getRoom(startRoomNumber);
-        List<Room> queue = new ArrayList<>();
-        queue.add(startRoom);
-
-        Room temp;
-
-        while (!queue.isEmpty()) {
-            temp = queue.get(0);
-            setParentAndCost(temp);
-
-            if (temp.getParent() != null)
-                System.out.println("Temp room is: " + temp.getRoomNumber()
-                        + " , parent " + temp.getParent().getRoomNumber()
-                        + " , distance " + temp.getDistanceToGoal());
-
-            if (temp.getRoomNumber() == endRoomNumber) {
-                printPath(endRoomNumber);
-            }
-
-            temp.setTested(true);
-            queue.remove(0);
-
-            for (Room room : building.getLinkedRooms(temp.getRoomNumber())) {
-                if (!room.isExpanded() && !queue.contains(room)) {
-                    queue.add(room);
-                }
-            }
-            building.sortByDistance(queue);
-            temp.setExpanded(true);
-
-        }//end while
-
-//        printPath(endName);
-//        return (myMap.getNode(endName).parent != null);
-
-        return true;
     }
 
     private void setParentAndCost(Room room) {
