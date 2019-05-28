@@ -12,6 +12,7 @@ public class Building {
 
     private Comparator<Room> byDistance = Comparator.comparingDouble(Room::getDistanceToGoal);
 
+
     public void addRoom(Room room) {
 
         if (room == null || myBuilding.containsKey(room.getRoomNumber())) {
@@ -21,21 +22,22 @@ public class Building {
         myBuilding.put(room.getRoomNumber(), room);
     }
 
-    public void addTransition(Integer startRoomNumber, Integer endRoomNumber, String transitionType, boolean isBiDirectional, double length) {
+    public void addTransition(Integer startRoomNumber, Integer endRoomNumber, Type type, boolean isBiDirectional, double length) {
         if (myBuilding.containsKey(startRoomNumber) && myBuilding.containsKey(endRoomNumber)) {
             Room startRoom = myBuilding.get(startRoomNumber);
             Room endRoom = myBuilding.get(endRoomNumber);
-            startRoom.getTransitions().add(new Transition(endRoomNumber, transitionType, length));
+            startRoom.getTransitions().add(new Transition(endRoomNumber, type, length));
 
             if (isBiDirectional) {
-                endRoom.getTransitions().add(new Transition(startRoomNumber, transitionType, length));
+                endRoom.getTransitions().add(new Transition(startRoomNumber, type, length));
             }
         } else {
             System.err.println("Wrong or missing rooms");
         }
     }
 
-    public Room getRoom(int roomNumber) {
+
+    private Room getRoom(int roomNumber) {
         return myBuilding.get(roomNumber);
     }
 
@@ -43,7 +45,8 @@ public class Building {
         return myBuilding.containsKey(roomNumber);
     }
 
-    public ArrayList<Room> getLinkedRooms(int roomNumber) {
+
+    private ArrayList<Room> getLinkedRooms(int roomNumber) {
         ArrayList<Room> linkedRooms = new ArrayList<>();
         Room room = myBuilding.get(roomNumber);
         for (Transition transition : room.getTransitions()) {

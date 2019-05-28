@@ -3,15 +3,15 @@ package com.uni.roomfinder.obj;
 public class Transition {
 
     private int toRoomNumber;
-    private String transitionType;
+    private Type transitionType;
     private double length;
 
-    public Transition(int toRoomId, String transitionType) {
+    public Transition(int toRoomId, Type transitionType) {
         this.toRoomNumber = toRoomId;
         this.transitionType = transitionType;
     }
 
-    public Transition(int toRoomId, String transitionType, double length) {
+    public Transition(int toRoomId, Type transitionType, double length) {
         this(toRoomId, transitionType);
         this.length = length;
     }
@@ -24,11 +24,11 @@ public class Transition {
         this.toRoomNumber = toRoomNumber;
     }
 
-    public String getTransitionType() {
+    public Type getTransitionType() {
         return transitionType;
     }
 
-    public void setTransitionType(String transitionType) {
+    public void setTransitionType(Type transitionType) {
         this.transitionType = transitionType;
     }
 

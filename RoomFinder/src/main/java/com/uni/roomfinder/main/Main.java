@@ -1,7 +1,6 @@
 package com.uni.roomfinder.main;
 
-import com.uni.roomfinder.obj.Building;
-import com.uni.roomfinder.obj.Room;
+import com.uni.roomfinder.obj.*;
 
 import java.io.File;
 import java.util.Objects;
@@ -9,17 +8,26 @@ import java.util.Scanner;
 
 public class Main {
 
-    private Building building = new Building();
+    private static Building building = new Building();
 
     public static void main(String[] args) throws Exception {
-        Main main = new Main();
+        init();
 
-        main.init();
-
+        findPath(303, 304, new SearchPathAvoiding(building, Type.CLIMB));
+//        findPath(301, 303, new SearchPathAvoiding(building, Type.CLIMB));
 
     }
 
-    public void init() throws Exception {
+    private static void findPath(int startRoomNumber, int endRoomNumber, Searchable searcher) {
+        building.resetAllRooms();
+        if (searcher.search(startRoomNumber, endRoomNumber)) {
+            System.out.println("HAVE A PATH");
+        } else {
+            System.out.println("THERE IS NO PATH");
+        }
+    }
+
+    public static void init() throws Exception {
         // File path in src/main/resources/...
         String fileName = "files/structure.txt";
 
@@ -56,26 +64,48 @@ public class Main {
         }
     }
 
-    private void createRoomFromLine(String line) {
+    private static void createRoomFromLine(String line) {
         String[] components = line.split(", ");
+
+        Type type = getTypeFromString(components[4].substring(0, components[4].length() - 1));
 
         building.addRoom(new Room(Integer.parseInt(components[0]),
                 Integer.parseInt(components[1]),
                 Integer.parseInt(components[2]),
                 Integer.parseInt(components[3]),
-                components[4].substring(0, components[4].length() - 1))); // For removing semicolon (;)
+                type)); // For removing semicolon (;)
     }
 
-    private void createTransitionFromLine(String line) {
+    private static void createTransitionFromLine(String line) {
         String[] components = line.split(", ");
 
         boolean isBidirectional = (components[4].substring(0, components[4].length() - 1).equalsIgnoreCase("yes"));
 
+        Type type = getTypeFromString(components[2]);
+
         building.addTransition(Integer.parseInt(components[0]),
                 Integer.parseInt(components[1]),
-                components[2],
+                type,
                 isBidirectional,
                 Integer.parseInt(components[3]));
+    }
+
+    private static Type getTypeFromString(String text) {
+
+        switch (text.toLowerCase()) {
+            case "room":
+                return Type.ROOM;
+            case "transition":
+                return Type.TRANSITION;
+            case "walk":
+                return Type.WALK;
+            case "climb":
+                return Type.CLIMB;
+            case "lift":
+                return Type.LIFT;
+            default:
+                throw new IllegalArgumentException("The parameter " + text + " is not a valid parameter.");
+        }
     }
 
     public Building getBuilding() {

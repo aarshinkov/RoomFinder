@@ -8,7 +8,7 @@ public class Room {
     private int x;
     private int y;
     private int floor;
-    private String type;
+    private Type type;
 
     private boolean isTested = false;
     private boolean isExpanded = false;
@@ -20,13 +20,13 @@ public class Room {
 //    public double weight;
 
 
-    public Room(int roomNumber, int floor, String type) {
+    public Room(int roomNumber, int floor, Type type) {
         this.roomNumber = roomNumber;
         this.floor = floor;
         this.type = type;
     }
 
-    public Room(int roomNumber, int x, int y, int floor, String type) {
+    public Room(int roomNumber, int x, int y, int floor, Type type) {
         this(roomNumber, floor, type);
         this.x = x;
         this.y = y;
@@ -72,11 +72,11 @@ public class Room {
         this.floor = floor;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
