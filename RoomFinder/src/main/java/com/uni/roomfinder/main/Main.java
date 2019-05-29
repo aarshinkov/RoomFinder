@@ -15,7 +15,7 @@ public class Main {
 
 //        findPath(232, 330, new SearchPathAvoiding(building, Type.LIFT));
 
-        findPath(232, 330, new SearchPathDoubleClimb(building));
+        findPath(304, 300, new DijkstraSearch(building));
 
     }
 
