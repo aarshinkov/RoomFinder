@@ -1,7 +1,5 @@
 package com.uni.roomfinder.obj;
 
-import com.uni.roomfinder.reference.Node;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,5 +49,10 @@ public class SearchPathDoubleClimb implements Searchable {
         }//end while
 
         return false;
+    }
+
+    @Override
+    public void getResult() {
+
     }
 }

@@ -88,4 +88,9 @@ public class DijkstraSearch implements Searchable {
             }
         }
     }
+
+    @Override
+    public void getResult() {
+
+    }
 }

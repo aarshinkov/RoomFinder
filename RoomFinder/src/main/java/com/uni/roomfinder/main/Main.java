@@ -23,6 +23,7 @@ public class Main {
         building.resetAllRooms();
         if (searcher.search(startRoomNumber, endRoomNumber)) {
             System.out.println("HAVE A PATH");
+//            searcher.getResult();
         } else {
             System.out.println("THERE IS NO PATH");
         }

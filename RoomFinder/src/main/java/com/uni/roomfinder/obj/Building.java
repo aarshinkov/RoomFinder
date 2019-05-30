@@ -1,9 +1,6 @@
 package com.uni.roomfinder.obj;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Building {
 
@@ -15,6 +12,7 @@ public class Building {
 
     private Comparator<Room> byDistance = Comparator.comparingDouble(Room::getDistanceToGoal);
 
+    private Comparator<Room> byFloor = Comparator.comparingInt(Room::getFloor);
 
     public void addRoom(Room room) {
 
@@ -84,6 +82,16 @@ public class Building {
 
     public void sortByWeight(List<Room> list) {
         list.sort(byWeight.thenComparing(byRoomNumber));
+    }
+
+    public void sortByFloor(List<Room> list, Priority priority) {
+
+        list.sort(byFloor.thenComparing(byRoomNumber));
+
+        if (priority.equals(Priority.UPWARDS)) {
+            Collections.reverse(list);
+
+        }
     }
 
     public void setDepths(int roomNumber) {

@@ -49,4 +49,9 @@ public class SearchPathAvoiding implements Searchable {
 
         return false;
     }
+
+    @Override
+    public void getResult() {
+
+    }
 }
