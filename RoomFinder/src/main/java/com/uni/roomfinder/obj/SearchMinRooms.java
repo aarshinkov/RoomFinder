@@ -43,10 +43,9 @@ public class SearchMinRooms implements Searchable {
             queue = clearUnwantedRooms(queue);
             temp = queue.get(0);
             int currentRoom = temp.getFloor();
-//            System.out.println("Temp room is: " + temp.getRoomNumber());
+            System.out.println("Temp room is: " + temp.getRoomNumber());
 
             if (temp.getRoomNumber() == endRoomNumber) {
-                printPath(path);
                 return true;
             }
 
@@ -63,7 +62,6 @@ public class SearchMinRooms implements Searchable {
             }
 
             temp.setExpanded(true);
-
         }
 
         return false;
